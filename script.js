@@ -48,8 +48,9 @@
   }
   window.addEventListener('scroll', armCheck, {passive:true});
 
-  // play phone videos (muted/loop)
+  // play phone videos (muted/loop) — src set at runtime so it streams (and isn't inlined into the standalone)
   document.querySelectorAll('video[data-auto]').forEach(function(v){
+    if (v.dataset.src && !v.src) v.src = v.dataset.src;
     var p = v.play(); if (p && p.catch) p.catch(function(){});
   });
 })();
